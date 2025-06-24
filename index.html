@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EduBuddy</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      color: #222;
+      transition: background 0.3s, color 0.3s;
+    }
+    header {
+      background-color: #1565c0;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    .toggle {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: #fff;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .container {
+      padding: 1rem;
+    }
+    .class-menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .class-btn {
+      background: #e3f2fd;
+      border: 1px solid #90caf9;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .subject-block {
+      margin: 1rem 0;
+      padding: 1rem;
+      background: #e1f5fe;
+      border-left: 5px solid #0288d1;
+    }
+    body.dark {
+      background: #121212;
+      color: #e0e0e0;
+    }
+    body.dark header {
+      background-color: #263238;
+    }
+    body.dark .class-btn {
+      background: #37474f;
+      color: white;
+      border-color: #546e7a;
+    }
+    body.dark .subject-block {
+      background: #263238;
+      border-left-color: #00bcd4;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>📘 EduBuddy</h1>
+  <p>Your offline study sidekick for Classes 1–12</p>
+  <button class="toggle" onclick="toggleDarkMode()">🌗 Dark Mode</button>
+</header>
+
+<div class="container">
+  <div class="class-menu" id="classMenu"></div>
+  <div id="subjectContainer"></div>
+</div>
+
+<script>
+  const classMenu = document.getElementById('classMenu');
+  const subjectContainer = document.getElementById('subjectContainer');
+
+  // Generate Class Buttons
+  for (let i = 1; i <= 12; i++) {
+    const btn = document.createElement('button');
+    btn.className = 'class-btn';
+    btn.innerText = `Class ${i}`;
+    btn.onclick = () => showSubjects(i);
+    classMenu.appendChild(btn);
+  }
+
+  function toggleDarkMode() {
+    document.body.classList.toggle('dark');
+  }
+
+  function showSubjects(classNum) {
+    const subjects = {
+      1: {
+        "English Language": "Learning the alphabet, simple words, and phonics.",
+        "Mathematics": "Counting 1–100, basic shapes, simple addition & subtraction.",
+        "Basic Science": "Five senses, identifying living and non-living things.",
+        "Social Studies": "Knowing family, environment, and basic manners.",
+        "Civic Education": "Understanding rights, responsibilities, and good behavior.",
+        "Health Education": "Personal hygiene, healthy eating, and staying clean.",
+        "Religious Studies": "Simple lessons from religious stories and prayer.",
+        "Verbal Reasoning": "Learning synonyms, antonyms, and rhyming words.",
+        "Quantitative Reasoning": "Patterns, sequencing, and simple logic puzzles.",
+        "Computer Studies": "Introduction to computers and devices.",
+        "Agricultural Science": "Farming basics and crops around us.",
+        "Cultural & Creative Arts": "Colors, drawings, songs, and crafts.",
+        "Home Economics": "Helping at home, simple chores, and healthy habits.",
+        "Moral Instruction": "Being kind, honest, and respectful.",
+        "French": "Common greetings, numbers, colors.",
+        "Literacy Development": "Reading basic passages with comprehension.",
+        "Music": "Singing songs, identifying instruments.",
+        "Physical Education": "Simple exercises and games.",
+        "Handwriting": "Writing letters, words, and spacing.",
+        "Story Time": "Short tales with lessons and imagination."
+      },
+      2: {
+        "English Language": "Forming sentences, nouns and verbs, reading short stories.",
+        "Mathematics": "Addition, subtraction, simple multiplication, shapes.",
+        "Basic Science": "Animals, weather, water and air.",
+        "Social Studies": "Cultural values, neighborhood and safety.",
+        "Civic Education": "Respect, fairness, being a good citizen.",
+        "Health Education": "Cleanliness, safety in school and home.",
+        "Religious Studies": "Lessons of sharing, truth, and kindness.",
+        "Verbal Reasoning": "Word matching, opposites, forming new words.",
+        "Quantitative Reasoning": "Missing numbers, patterns, number puzzles.",
+        "Computer Studies": "Parts of a computer and their uses.",
+        "Agricultural Science": "Tools used on a farm and animal care.",
+        "Cultural & Creative Arts": "Drawing from nature, local songs and festivals.",
+        "Home Economics": "Caring for clothing, helping in the kitchen.",
+        "Moral Instruction": "Truthfulness, sharing, obedience.",
+        "French": "Naming animals, fruits, and greetings.",
+        "Literacy Development": "Reading and understanding instructions.",
+        "Music": "Rhythms, beats, and singing in groups.",
+        "Physical Education": "Stretching, skipping, jumping techniques.",
+        "Handwriting": "Copying passages neatly.",
+        "Story Time": "Stories with morals and imagination games."
+      },
+      3: {
+        "English Language": "Parts of speech, comprehension, writing simple letters.",
+        "Mathematics": "Multiplication tables, division, time & measurement.",
+        "Basic Science": "Plant growth, energy sources, environment care.",
+        "Social Studies": "Nigerian culture, leadership, family types.",
+        "Civic Education": "Respecting rules, tolerance, group work.",
+        "Health Education": "First aid basics, healthy food, exercise.",
+        "Religious Studies": "Respect, forgiveness, loyalty.",
+        "Verbal Reasoning": "Word formation, analogies, sequencing.",
+        "Quantitative Reasoning": "Bar graphs, money problems, area estimation.",
+        "Computer Studies": "Input & output devices, typing basics.",
+        "Agricultural Science": "Food preservation, planting process.",
+        "Cultural & Creative Arts": "Paper crafts, drama, dances.",
+        "Home Economics": "Proper food handling, household chores.",
+        "Moral Instruction": "Self-control, honesty, courage.",
+        "French": "Daily activities and classroom words.",
+        "Literacy Development": "Writing short descriptive passages.",
+        "Music": "Identifying notes and simple instruments.",
+        "Physical Education": "Jogging, simple team sports.",
+        "Handwriting": "Paragraph spacing and punctuation.",
+        "Story Time": "Creative stories, answer questions."
+      },
+      4: {
+        "English Language": "Tenses, pronouns, comprehension passages.",
+        "Mathematics": "Fractions, long division, word problems.",
+        "Basic Science": "Human body, solar system, measurement tools.",
+        "Social Studies": "Culture, climate, transport in Nigeria.",
+        "Civic Education": "Democracy, responsibilities, rights of citizens.",
+        "Health Education": "Diseases, drugs, rest and sleep.",
+        "Religious Studies": "Obedience, community living.",
+        "Verbal Reasoning": "Analogies, associations, opposite pairs.",
+        "Quantitative Reasoning": "Simple equations, diagrams, puzzles.",
+        "Computer Studies": "Storage devices, uses of ICT.",
+        "Agricultural Science": "Soil types, irrigation systems.",
+        "Cultural & Creative Arts": "Designs, instruments, cultural values.",
+        "Home Economics": "Healthy habits, domestic chores.",
+        "Moral Instruction": "Respect, compassion, fair play.",
+        "French": "Simple questions, classroom objects.",
+        "Literacy Development": "Summarizing short stories.",
+        "Music": "Time signature, rhythm, tempo.",
+        "Physical Education": "Posture, common injuries.",
+        "Handwriting": "Joining cursive letters neatly.",
+        "Story Time": "Role-play and creative storytelling."
+      },
+      5: {
+        "English Language": "Grammar, comprehension, writing formats."
+      },
+      6: {
+        "Mathematics": "Decimals, percentages, geometry intro."
+      },
+      7: {
+        "English Language": "Parts of speech, essay writing."
+      },
+      8: {
+        "Mathematics": "Probability, graphs, algebra basics."
+      },
+      9: {
+        "Basic Science": "Nutrition, electric circuits,
